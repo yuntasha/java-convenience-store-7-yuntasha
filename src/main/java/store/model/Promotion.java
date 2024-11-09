@@ -20,4 +20,15 @@ public class Promotion {
     public String getName() {
         return name;
     }
+
+    /**
+     * 기간 내인지 검사
+     * start <= now <= end
+     *
+     * @param now   현재 날짜
+     * @return 기간안이면 true
+     */
+    public boolean isPeriod(LocalDate now) {
+        return now.isAfter(startDate) && now.isBefore(endDate) || now.isEqual(startDate) || now.isEqual(endDate);
+    }
 }
