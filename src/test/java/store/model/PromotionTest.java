@@ -30,7 +30,7 @@ class PromotionTest {
 
     @BeforeEach
     void setUp() {
-        promotion = new Promotion("test", 1, 3,
+        promotion = new Promotion("test", 2, 1,
                 LocalDate.of(2024, 11, 1),
                 LocalDate.of(2024, 11, 30));
     }
@@ -70,5 +70,56 @@ class PromotionTest {
 
         // then
         assertEquals(false, result);
+    }
+
+    @ParameterizedTest(name = "{index} 프로모션 기간 중 {0} 추가")
+    @FieldSource("inDates")
+    void 프로모션_기간_중_추가(LocalDate now) {
+        // given
+        int buyCount = 11;
+
+        // when
+        boolean result = promotion.giveMore(buyCount, now);
+
+        // then
+        assertEquals(true, result);
+    }
+
+    @ParameterizedTest(name = "{index} 프로모션 기간 중 {0} 추가X")
+    @FieldSource("inDates")
+    void 프로모션_기간_중_추가X(LocalDate now) {
+        // given
+        int buyCount = 10;
+
+        // when
+        boolean result = promotion.giveMore(buyCount, now);
+
+        // then
+        assertEquals(false, result);
+    }
+
+    @ParameterizedTest(name = "{index} 프로모션 기간 외 {0} 추가X")
+    @FieldSource("outDates")
+    void 프로모션_기간_외_추가X(LocalDate now) {
+        // given
+        int buyCount = 11;
+
+        // when
+        boolean result = promotion.giveMore(buyCount, now);
+
+        // then
+        assertEquals(false, result);
+    }
+
+    @Test
+    @DisplayName("N+1 반환")
+    void valueSumReturn() {
+        // given
+
+        // when
+        int result = promotion.getBuyPlusGet();
+
+        // then
+        assertEquals(3, result);
     }
 }
