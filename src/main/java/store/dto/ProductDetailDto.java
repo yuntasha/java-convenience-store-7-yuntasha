@@ -5,11 +5,11 @@ import store.model.Promotion;
 import java.util.Objects;
 
 public class ProductDetailDto {
-    private String name;
-    private int price;
-    private int quantity;
-    private String promotionName;
-    private int pQuantity;
+    private final String name;
+    private final int price;
+    private final int quantity;
+    private final String promotionName;
+    private final int pQuantity;
 
     /**
      * 프로모션이 있는 경우 생성자
