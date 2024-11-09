@@ -4,16 +4,16 @@ import store.model.BuyState;
 
 import java.util.Objects;
 
-public class BuyDto {
+public class BuyStateDto {
     private final BuyState buyState;
     private final int count;
 
-    public BuyDto(BuyState buyState, int count) {
+    public BuyStateDto(BuyState buyState, int count) {
         this.buyState = buyState;
         this.count = count;
     }
 
-    public BuyDto(BuyState buyState) {
+    public BuyStateDto(BuyState buyState) {
         this.buyState = buyState;
         this.count = 0;
     }
@@ -30,8 +30,8 @@ public class BuyDto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        BuyDto buyDto = (BuyDto) o;
-        return count == buyDto.count && buyState == buyDto.buyState;
+        BuyStateDto buyStateDto = (BuyStateDto) o;
+        return count == buyStateDto.count && buyState == buyStateDto.buyState;
     }
 
     @Override

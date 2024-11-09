@@ -1,6 +1,6 @@
 package store.model;
 
-import store.dto.BuyDto;
+import store.dto.BuyStateDto;
 import store.dto.ProductDetailDto;
 import store.exception.ConvenienceException;
 import store.exception.ErrorMessage;
@@ -70,20 +70,20 @@ public class Product {
      * @return 구매 상태 반환
      * @throws ConvenienceException 재고 부족 예외
      */
-    public BuyDto getBuyState(int buyCount, LocalDate now) throws ConvenienceException {
+    public BuyStateDto getBuyState(int buyCount, LocalDate now) throws ConvenienceException {
         if (!isEnoughQuantity(buyCount, now)) {
             throw new ConvenienceException(ErrorMessage.EXCEEDED_QUANTITY_ERROR);
         }
 
         if (isNotEnoughPromotionQuantity(buyCount, now)) {
-            return new BuyDto(BuyState.OUT_OF_STOCK, getNomalBuyCount(buyCount));
+            return new BuyStateDto(BuyState.OUT_OF_STOCK, getNomalBuyCount(buyCount));
         }
 
         if (isPromotion(now) && promotion.giveMore(buyCount, now)) {
-            return new BuyDto(BuyState.ADD_MORE);
+            return new BuyStateDto(BuyState.ADD_MORE);
         }
 
-        return new BuyDto(BuyState.NOMAL);
+        return new BuyStateDto(BuyState.NOMAL);
     }
 
     /**
@@ -128,4 +128,6 @@ public class Product {
     private int getNomalBuyCount(int buyCount) {
         return buyCount - pQuantity + (pQuantity % promotion.getBuyPlusGet());
     }
+
+
 }

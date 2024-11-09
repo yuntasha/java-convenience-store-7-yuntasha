@@ -3,7 +3,7 @@ package store.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import store.dto.BuyDto;
+import store.dto.BuyStateDto;
 import store.dto.ProductDetailDto;
 import store.exception.ConvenienceException;
 import store.exception.ErrorMessage;
@@ -68,10 +68,10 @@ class ProductTest {
         int buyCount = 10;
 
         // when
-        BuyDto buyDto = product.getBuyState(buyCount, now);
+        BuyStateDto buyStateDto = product.getBuyState(buyCount, now);
 
         // then
-        assertEquals(new BuyDto(BuyState.NOMAL), buyDto);
+        assertEquals(new BuyStateDto(BuyState.NOMAL), buyStateDto);
     }
 
     @Test
@@ -115,10 +115,10 @@ class ProductTest {
         int buyCount = 8;
 
         // when
-        BuyDto result = product.getBuyState(buyCount, now);
+        BuyStateDto result = product.getBuyState(buyCount, now);
 
         // then
-        assertEquals(new BuyDto(BuyState.ADD_MORE), result);
+        assertEquals(new BuyStateDto(BuyState.ADD_MORE), result);
     }
 
     @Test
@@ -131,10 +131,10 @@ class ProductTest {
         int buyCount = 12;
 
         // when
-        BuyDto result = product.getBuyState(buyCount, now);
+        BuyStateDto result = product.getBuyState(buyCount, now);
 
         // then
-        assertEquals(new BuyDto(BuyState.OUT_OF_STOCK, 3), result);
+        assertEquals(new BuyStateDto(BuyState.OUT_OF_STOCK, 3), result);
     }
 
     @Test
@@ -163,10 +163,10 @@ class ProductTest {
         int buyCount = 8;
 
         // when
-        BuyDto result = product.getBuyState(buyCount, now);
+        BuyStateDto result = product.getBuyState(buyCount, now);
 
         // then
-        assertEquals(new BuyDto(BuyState.NOMAL), result);
+        assertEquals(new BuyStateDto(BuyState.NOMAL), result);
     }
 
     @Test
@@ -179,9 +179,9 @@ class ProductTest {
         int buyCount = 12;
 
         // when
-        BuyDto result = product.getBuyState(buyCount, now);
+        BuyStateDto result = product.getBuyState(buyCount, now);
 
         // then
-        assertEquals(new BuyDto(BuyState.NOMAL), result);
+        assertEquals(new BuyStateDto(BuyState.NOMAL), result);
     }
 }
