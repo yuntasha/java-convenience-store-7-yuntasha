@@ -1,5 +1,7 @@
 package store.dto;
 
+import store.util.StringUtil;
+
 import java.util.Objects;
 
 public class ProductDetailDto {
@@ -57,7 +59,7 @@ public class ProductDetailDto {
         return promotionName;
     }
 
-    public int getpQuantity() {
+    public int getPQuantity() {
         return pQuantity;
     }
 
