@@ -12,7 +12,7 @@ public class BuyDto {
      */
     private final int price;
     /**
-     * 일반 제품 구매 수량
+     * 프로모션 미적용 제품 구매 수량
      */
     private final int count;
     /**
@@ -44,20 +44,24 @@ public class BuyDto {
         return name;
     }
 
-    public int getPrice() {
-        return price;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public int getPCount() {
-        return pCount;
-    }
-
     public int getFreeCount() {
         return freeCount;
+    }
+
+    public int getAllCount() {
+        return count + pCount;
+    }
+
+    public int getAllPrice() {
+        return getAllCount() * price;
+    }
+
+    public int getDiscount() {
+        return freeCount * price;
+    }
+
+    public int getNoPromotionPrice() {
+        return count * price;
     }
 
     @Override
