@@ -28,8 +28,9 @@ public class CPromotion implements Promotion {
 
     /**
      * 기간 내인지 검사
+     * <pre>
      * start <= now <= end
-     *
+     * </pre>
      * @param now 현재 날짜
      * @return 기간안이면 true
      */
