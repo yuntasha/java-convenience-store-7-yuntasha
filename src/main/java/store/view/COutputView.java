@@ -1,6 +1,7 @@
 package store.view;
 
 import store.dto.ProductDetailDto;
+import store.exception.ConvenienceException;
 import store.util.StringUtil;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public class COutputView implements OutputView {
 
     private static OutputView cOutputView;
 
-    public OutputView getInstance() {
+    public static OutputView getInstance() {
         if (Objects.isNull(cOutputView)) {
             cOutputView = new COutputView();
         }
@@ -23,12 +24,31 @@ public class COutputView implements OutputView {
         System.out.println(makeWelcome(productDetailDto));
     }
 
+    @Override
+    public void printErrorMessage(ConvenienceException e) {
+        System.out.println(e.getConsoleMessage());
+    }
+
+    @Override
+    public void totalPrint(String allProduct, String promotionProduct, String total) {
+        StringJoiner printText = new StringJoiner(StringUtil.LINE_BREAK);
+
+        printText.add(StringUtil.W_CONVENIENCE);
+        printText.add(allProduct);
+        printText.add(StringUtil.PROMOTION_TITLE);
+        printText.add(promotionProduct);
+        printText.add(StringUtil.DELIMITER);
+        printText.add(total);
+
+        System.out.println(printText.toString());
+    }
+
     private String makeWelcome(List<ProductDetailDto> productDetailDto) {
         StringJoiner printText = new StringJoiner(StringUtil.LINE_BREAK);
         printText.add(StringUtil.HELLO_MESSAGE);
 
         productDetailDto.stream().map(StringUtil::dtoToString).forEach(printText::add);
-
+        printText.add(StringUtil.EMPTY);
         return printText.toString();
     }
 }

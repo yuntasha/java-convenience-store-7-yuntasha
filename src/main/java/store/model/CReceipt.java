@@ -22,8 +22,8 @@ public class CReceipt implements Receipt {
     }
 
     @Override
-    public void applyMembership() {
-        this.membership = true;
+    public void applyMembership(boolean b) {
+        this.membership = b;
     }
 
     /**
@@ -86,10 +86,10 @@ public class CReceipt implements Receipt {
         int totalPrice = allPrice - promotionDiscount - membershipDiscount;
 
         return String.format(StringUtil.TOTAL_FORMAT,
-                allCount, allPrice,
-                promotionDiscount,
-                membershipDiscount,
-                totalPrice);
+                allCount, StringUtil.INT_FORMAT.format(allPrice),
+                StringUtil.INT_FORMAT.format(promotionDiscount),
+                StringUtil.INT_FORMAT.format(membershipDiscount),
+                StringUtil.INT_FORMAT.format(totalPrice));
     }
 
     private int getAllCount() {
@@ -106,7 +106,10 @@ public class CReceipt implements Receipt {
     }
 
     private int getMembershipDiscount() {
-        return products.stream().mapToInt(BuyDto::getNoPromotionPrice).sum()/10*3;
+        if (membership) {
+            return products.stream().mapToInt(BuyDto::getNoPromotionPrice).sum() / 10 * 3;
+        }
+        return 0;
     }
     
     

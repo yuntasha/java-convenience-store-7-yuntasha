@@ -8,6 +8,7 @@ public class ConvenienceException extends IllegalArgumentException{
 
     public ConvenienceException(ErrorMessage errorMessage) {
         super(errorMessage.getMessage());
+        this.errorMessage = errorMessage;
     }
 
     public String getConsoleMessage() {

@@ -16,4 +16,12 @@ public class BuyInputDto {
     public int getCount() {
         return count;
     }
+
+    public void addCount() {
+        count++;
+    }
+
+    public void removeCount(int n) {
+        count-=n;
+    }
 }

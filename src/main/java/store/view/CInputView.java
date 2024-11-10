@@ -26,9 +26,12 @@ public class CInputView implements InputView {
      * 구매 입력 받기
      *
      * @return 구매 입력 데이터
+     * @throws ConvenienceException 형식에 맞지않음
      */
     @Override
-    public List<BuyInputDto> getBuyInput() {
+    public List<BuyInputDto> getBuyInput() throws ConvenienceException {
+        System.out.println(StringUtil.BUY_MESSAGE);
+
         String input = Console.readLine();
 
         validateBuyInput(input);
@@ -42,8 +45,9 @@ public class CInputView implements InputView {
      * 테스트 떄문에 protected로 설정 (추후 리팩토링)
      *
      * @param input 입력
+     * @throws ConvenienceException 형식에 맞지않음
      */
-    void validateBuyInput(String input) {
+    void validateBuyInput(String input) throws ConvenienceException {
         if (!Pattern.matches(StringUtil.BUY_INPUT_FORMAT, input)) {
             throw new ConvenienceException(ErrorMessage.WRONG_INPUT_FORMAT_ERROR);
         }
