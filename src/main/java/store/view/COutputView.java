@@ -11,7 +11,6 @@ public class COutputView implements OutputView {
 
     private static OutputView cOutputView;
 
-    @Override
     public OutputView getInstance() {
         if (Objects.isNull(cOutputView)) {
             cOutputView = new COutputView();
