@@ -24,14 +24,21 @@ public class StringUtil {
     public static final String HIGH_BAR = "-";
     public static final String COMMA = ",";
     public static final String W_CONVENIENCE = "==============W 편의점================";
+    public static final String PRODUCT_TITLE = "상품명\t\t수량\t금액";
+    public static final String PRODUCT_FORMAT = "%s\t%d\t%s";
     public static final String PROMOTION_TITLE = "=============증\t정===============";
+    public static final String PROMOTION_FORMAT = "%s\t\t%d";
     public static final String DELIMITER = "====================================";
+    public static final String TOTAL_FORMAT = "총구매액\t\t%d\t%s\n" +
+            "행사할인\t\t\t-%s\n" +
+            "멤버십할인\t\t\t-%s\n" +
+            "내실돈\t\t\t %s";
+    public static final DecimalFormat INT_FORMAT = new DecimalFormat("###,###");
 
     private static final String FILE_ERROR_FORMAT =
             "%s을 읽어오던 중 문제가 생겼습니다.";
     private static final String PRODUCT_DETAIL_NO_PROMOTION_FORMAT = "- %s %s원 %s";
     private static final String PRODUCT_DETAIL_PROMOTION_FORMAT = "- %s %s원 %s %s";
-    private static final DecimalFormat INT_FORMAT = new DecimalFormat("###,###");
     private static final String NO_QUANTITY = "재고 없음";
     private static final String COUNT = "개";
 
