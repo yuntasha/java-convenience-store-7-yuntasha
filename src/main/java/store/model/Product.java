@@ -1,5 +1,6 @@
 package store.model;
 
+import store.dto.BuyDto;
 import store.dto.BuyStateDto;
 import store.dto.ProductDetailDto;
 import store.exception.ConvenienceException;
@@ -71,9 +72,7 @@ public class Product {
      * @throws ConvenienceException 재고 부족 예외
      */
     public BuyStateDto getBuyState(int buyCount, LocalDate now) throws ConvenienceException {
-        if (!isEnoughQuantity(buyCount, now)) {
-            throw new ConvenienceException(ErrorMessage.EXCEEDED_QUANTITY_ERROR);
-        }
+        validateBuyCount(buyCount, now);
 
         if (isNotEnoughPromotionQuantity(buyCount, now)) {
             return new BuyStateDto(BuyState.OUT_OF_STOCK, getNomalBuyCount(buyCount));
@@ -84,6 +83,19 @@ public class Product {
         }
 
         return new BuyStateDto(BuyState.NOMAL);
+    }
+
+    /**
+     * 현재 N개를 구매할 수 있는 재고가 있는지 검사
+     *
+     * @param buyCount 구매 개수
+     * @param now      현재 시각
+     * @throws ConvenienceException 살 수 없으면 에러
+     */
+    private void validateBuyCount(int buyCount, LocalDate now) throws ConvenienceException {
+        if (!isEnoughQuantity(buyCount, now)) {
+            throw new ConvenienceException(ErrorMessage.EXCEEDED_QUANTITY_ERROR);
+        }
     }
 
     /**
@@ -129,5 +141,82 @@ public class Product {
         return buyCount - pQuantity + (pQuantity % promotion.getBuyPlusGet());
     }
 
+    /**
+     * N개를 구매
+     *
+     * @param buyCount 구매 수량
+     * @param now      현재 시각
+     * @return 구매 데이터
+     * @throws ConvenienceException 구매 수량 초과 에러
+     */
+    public BuyDto buy(int buyCount, LocalDate now) throws ConvenienceException {
+        validateBuyCount(buyCount, now);
 
+        // 프로모션 적용된 경우
+        if (isPromotion(now)) {
+            int buyP = getBuyP(buyCount);
+            int buyN = getBuyN(buyCount, buyP);
+            updateQuntity(buyN, buyP);
+
+            int freeCount = buyP / promotion.getBuyPlusGet();
+            int pCount = freeCount * promotion.getBuyPlusGet();
+
+            return new BuyDto(this.name, this.price, buyCount-pCount, pCount, freeCount);
+        }
+
+        updateQuntity(buyCount);
+
+        return new BuyDto(this.name, this.price, buyCount);
+    }
+
+    /**
+     * 재고 최신화
+     *
+     * @param quantity  기본 재고 구매
+     * @param pQuantity 프로모션 재고 구매
+     */
+    private void updateQuntity(int quantity, int pQuantity) {
+        this.quantity -= quantity;
+        this.pQuantity -= pQuantity;
+    }
+
+    /**
+     * 재고 최신화
+     *
+     * @param quantity 기본 재고 구매
+     */
+    private void updateQuntity(int quantity) {
+        this.quantity -= quantity;
+    }
+
+    /**
+     * 일반 제품 구매 수량 반환
+     *
+     * @param buyCount 구매 개수
+     * @param pCount   프로모션 상품 구매 개수
+     * @return 일반 구매 개수
+     */
+    private int getBuyN(int buyCount, int pCount) {
+        return Math.max(buyCount - pCount, 0);
+    }
+
+    /**
+     * 프로모션 구매 개수 반환
+     *
+     * @param buyCount 구매 개수
+     * @return 프로모션 구매 개수
+     */
+    private int getBuyP(int buyCount) {
+        return Math.min(this.pQuantity, buyCount);
+    }
+
+    /**
+     * 프로모션 적용 개수 반환
+     *
+     * @param freeCount 공짜 프로모션 개수
+     * @return 프로모션 적용 개수
+     */
+    private int getPCount(int freeCount) {
+        return freeCount * promotion.getBuyPlusGet();
+    }
 }

@@ -3,6 +3,7 @@ package store.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import store.dto.BuyDto;
 import store.dto.BuyStateDto;
 import store.dto.ProductDetailDto;
 import store.exception.ConvenienceException;
@@ -184,4 +185,76 @@ class ProductTest {
         // then
         assertEquals(new BuyStateDto(BuyState.NOMAL), result);
     }
+
+    @Test
+    @DisplayName("물건 구매 - 프로모션X")
+    void 물건_구매_프로모션_X() {
+        // given
+        int quantity = 20;
+        product.addProduct(quantity);
+        LocalDate now = LocalDate.of(2024, 11, 3);
+        int buyCount = 12;
+
+        // when
+        BuyDto result = product.buy(buyCount, now);
+
+        // then
+        assertEquals(new BuyDto("콜라", 1000, buyCount), result);
+    }
+
+    @Test
+    @DisplayName("물건 구매 - 프로모션 기간 외")
+    void 물건_구매_프로모션_기간_외() {
+        // given
+        int quantity = 20;
+        int pQuantity = 11;
+        product.addProduct(quantity);
+        product.addProduct(pQuantity, promotion);
+        LocalDate now = LocalDate.of(2023, 11, 3);
+        int buyCount = 12;
+
+        // when
+        BuyDto result = product.buy(buyCount, now);
+
+        // then
+        assertEquals(new BuyDto("콜라", 1000, buyCount), result);
+    }
+
+    @Test
+    @DisplayName("물건 구매 - 프로모션만 구매")
+    void 물건_구매_프로모션_프로모션만_구매() {
+        // given
+        int quantity = 20;
+        int pQuantity = 14;
+        product.addProduct(quantity);
+        product.addProduct(pQuantity, promotion);
+        LocalDate now = LocalDate.of(2024, 11, 3);
+        int buyCount = 12;
+
+        // when
+        BuyDto result = product.buy(buyCount, now);
+
+        // then
+        assertEquals(new BuyDto("콜라", 1000, 0, 12, 4), result);
+    }
+
+    @Test
+    @DisplayName("물건 구매 - 프로모션 일부 구매")
+    void 물건_구매_프로모션_프로모션_일부_구매() {
+        // given
+        int quantity = 20;
+        int pQuantity = 10;
+        product.addProduct(quantity);
+        product.addProduct(pQuantity, promotion);
+        LocalDate now = LocalDate.of(2024, 11, 3);
+        int buyCount = 12;
+
+        // when
+        BuyDto result = product.buy(buyCount, now);
+
+        // then
+        assertEquals(new BuyDto("콜라", 1000, 3, 9, 3), result);
+    }
+
+
 }
