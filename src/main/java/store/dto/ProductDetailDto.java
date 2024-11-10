@@ -1,7 +1,5 @@
 package store.dto;
 
-import store.model.Promotion;
-
 import java.util.Objects;
 
 public class ProductDetailDto {

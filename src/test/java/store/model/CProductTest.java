@@ -14,15 +14,15 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class ProductTest {
+class CProductTest {
 
-    private Product product;
+    private CProduct CProduct;
     private Promotion promotion;
 
     @BeforeEach
     void setUp() {
-        product = new Product("콜라", 1000);
-        promotion = new Promotion("탄산2+1", 2, 1,
+        CProduct = new CProduct("콜라", 1000);
+        promotion = new CPromotion("탄산2+1", 2, 1,
                 LocalDate.of(2024, 11, 1),
                 LocalDate.of(2024, 11, 30));
     }
@@ -31,12 +31,12 @@ class ProductTest {
     @DisplayName("재고 정보 반환 - 기간 중")
     void 재고_정보_반환_기간중() {
         // given
-        product.addProduct(10);
-        product.addProduct(11, promotion);
+        CProduct.addProduct(10);
+        CProduct.addProduct(11, promotion);
         LocalDate now = LocalDate.of(2024, 11, 3);
 
         // when
-        ProductDetailDto dto = product.getProductDetailDto(now);
+        ProductDetailDto dto = CProduct.getProductDetailDto(now);
 
         // then
         assertEquals(
@@ -48,12 +48,12 @@ class ProductTest {
     @DisplayName("현재 재고 반환 - 기간 외")
     void 재고_정보_반환_기간외() {
         // given
-        product.addProduct(10);
-        product.addProduct(11, promotion);
+        CProduct.addProduct(10);
+        CProduct.addProduct(11, promotion);
         LocalDate now = LocalDate.of(2023, 11, 3);
 
         // when
-        ProductDetailDto dto = product.getProductDetailDto(now);
+        ProductDetailDto dto = CProduct.getProductDetailDto(now);
 
         // then
         assertEquals(new ProductDetailDto("콜라", 1000, 10),
@@ -64,12 +64,12 @@ class ProductTest {
     @DisplayName("구매 가능 여부 - 구매 가능")
     void 구매_가능_여부_구매_가능() {
         // given
-        product.addProduct(10);
+        CProduct.addProduct(10);
         LocalDate now = LocalDate.of(2023, 11, 3);
         int buyCount = 10;
 
         // when
-        BuyStateDto buyStateDto = product.getBuyState(buyCount, now);
+        BuyStateDto buyStateDto = CProduct.getBuyState(buyCount, now);
 
         // then
         assertEquals(new BuyStateDto(BuyState.NOMAL), buyStateDto);
@@ -79,12 +79,12 @@ class ProductTest {
     @DisplayName("구매 가능 여부(프로모션 없음) - 재고 부족")
     void 구매_가능_여부_재고_부족() {
         // given
-        product.addProduct(10);
+        CProduct.addProduct(10);
         LocalDate now = LocalDate.of(2024, 11, 3);
         int buyCount = 11;
 
         // when
-        ConvenienceException exception = assertThrows(ConvenienceException.class, () -> product.getBuyState(buyCount, now));
+        ConvenienceException exception = assertThrows(ConvenienceException.class, () -> CProduct.getBuyState(buyCount, now));
 
         // then
         assertEquals(ErrorMessage.EXCEEDED_QUANTITY_ERROR.getMessage(), exception.getMessage());
@@ -94,13 +94,13 @@ class ProductTest {
     @DisplayName("구매 가능 여부(프로모션 보유) - 재고 부족")
     void 구매_가능_여부_프로모션_보유_재고_부족() {
         // given
-        product.addProduct(10);
-        product.addProduct(11, promotion);
+        CProduct.addProduct(10);
+        CProduct.addProduct(11, promotion);
         LocalDate now = LocalDate.of(2024, 11, 3);
         int buyCount = 22;
 
         // when
-        ConvenienceException exception = assertThrows(ConvenienceException.class, () -> product.getBuyState(buyCount, now));
+        ConvenienceException exception = assertThrows(ConvenienceException.class, () -> CProduct.getBuyState(buyCount, now));
 
         // then
         assertEquals(ErrorMessage.EXCEEDED_QUANTITY_ERROR.getMessage(), exception.getMessage());
@@ -110,13 +110,13 @@ class ProductTest {
     @DisplayName("구매 가능 여부(프로모션 보유) - 추가 프로모션")
     void 구매_가능_여부_프로모션_보유_추가_프로모션() {
         // given
-        product.addProduct(10);
-        product.addProduct(11, promotion);
+        CProduct.addProduct(10);
+        CProduct.addProduct(11, promotion);
         LocalDate now = LocalDate.of(2024, 11, 3);
         int buyCount = 8;
 
         // when
-        BuyStateDto result = product.getBuyState(buyCount, now);
+        BuyStateDto result = CProduct.getBuyState(buyCount, now);
 
         // then
         assertEquals(new BuyStateDto(BuyState.ADD_MORE), result);
@@ -126,13 +126,13 @@ class ProductTest {
     @DisplayName("구매 가능 여부(프로모션 보유) - 프로모션 부족")
     void 구매_가능_여부_프로모션_보유_프로모션_부족() {
         // given
-        product.addProduct(10);
-        product.addProduct(11, promotion);
+        CProduct.addProduct(10);
+        CProduct.addProduct(11, promotion);
         LocalDate now = LocalDate.of(2024, 11, 3);
         int buyCount = 12;
 
         // when
-        BuyStateDto result = product.getBuyState(buyCount, now);
+        BuyStateDto result = CProduct.getBuyState(buyCount, now);
 
         // then
         assertEquals(new BuyStateDto(BuyState.OUT_OF_STOCK, 3), result);
@@ -142,13 +142,13 @@ class ProductTest {
     @DisplayName("구매 가능 여부(프로모션 기간 외) - 재고 부족")
     void 구매_가능_여부_프로모션_기간_외_재고_부족() {
         // given
-        product.addProduct(10);
-        product.addProduct(11, promotion);
+        CProduct.addProduct(10);
+        CProduct.addProduct(11, promotion);
         LocalDate now = LocalDate.of(2023, 11, 3);
         int buyCount = 11;
 
         // when
-        ConvenienceException exception = assertThrows(ConvenienceException.class, () -> product.getBuyState(buyCount, now));
+        ConvenienceException exception = assertThrows(ConvenienceException.class, () -> CProduct.getBuyState(buyCount, now));
 
         // then
         assertEquals(ErrorMessage.EXCEEDED_QUANTITY_ERROR.getMessage(), exception.getMessage());
@@ -158,13 +158,13 @@ class ProductTest {
     @DisplayName("구매 가능 여부(프로모션 기간 외) - 추가 프로모션 x")
     void 구매_가능_여부_프로모션_기간_외_추가_프로모션() {
         // given
-        product.addProduct(20);
-        product.addProduct(11, promotion);
+        CProduct.addProduct(20);
+        CProduct.addProduct(11, promotion);
         LocalDate now = LocalDate.of(2023, 11, 3);
         int buyCount = 8;
 
         // when
-        BuyStateDto result = product.getBuyState(buyCount, now);
+        BuyStateDto result = CProduct.getBuyState(buyCount, now);
 
         // then
         assertEquals(new BuyStateDto(BuyState.NOMAL), result);
@@ -174,13 +174,13 @@ class ProductTest {
     @DisplayName("구매 가능 여부(프로모션 기간 외) - 프로모션 부족 x")
     void 구매_가능_여부_프로모션_기간_외_프로모션_부족() {
         // given
-        product.addProduct(20);
-        product.addProduct(11, promotion);
+        CProduct.addProduct(20);
+        CProduct.addProduct(11, promotion);
         LocalDate now = LocalDate.of(2023, 11, 3);
         int buyCount = 12;
 
         // when
-        BuyStateDto result = product.getBuyState(buyCount, now);
+        BuyStateDto result = CProduct.getBuyState(buyCount, now);
 
         // then
         assertEquals(new BuyStateDto(BuyState.NOMAL), result);
@@ -191,15 +191,17 @@ class ProductTest {
     void 물건_구매_프로모션_X() {
         // given
         int quantity = 20;
-        product.addProduct(quantity);
+        CProduct.addProduct(quantity);
         LocalDate now = LocalDate.of(2024, 11, 3);
         int buyCount = 12;
 
         // when
-        BuyDto result = product.buy(buyCount, now);
+        BuyDto result = CProduct.buy(buyCount, now);
+        ProductDetailDto detailDto = CProduct.getProductDetailDto(now);
 
         // then
         assertEquals(new BuyDto("콜라", 1000, buyCount), result);
+        assertEquals(new ProductDetailDto("콜라", 1000, 8), detailDto);
     }
 
     @Test
@@ -208,16 +210,18 @@ class ProductTest {
         // given
         int quantity = 20;
         int pQuantity = 11;
-        product.addProduct(quantity);
-        product.addProduct(pQuantity, promotion);
+        CProduct.addProduct(quantity);
+        CProduct.addProduct(pQuantity, promotion);
         LocalDate now = LocalDate.of(2023, 11, 3);
         int buyCount = 12;
 
         // when
-        BuyDto result = product.buy(buyCount, now);
+        BuyDto result = CProduct.buy(buyCount, now);
+        ProductDetailDto detailDto = CProduct.getProductDetailDto(now);
 
         // then
         assertEquals(new BuyDto("콜라", 1000, buyCount), result);
+        assertEquals(new ProductDetailDto("콜라", 1000, 8), detailDto);
     }
 
     @Test
@@ -226,16 +230,18 @@ class ProductTest {
         // given
         int quantity = 20;
         int pQuantity = 14;
-        product.addProduct(quantity);
-        product.addProduct(pQuantity, promotion);
+        CProduct.addProduct(quantity);
+        CProduct.addProduct(pQuantity, promotion);
         LocalDate now = LocalDate.of(2024, 11, 3);
         int buyCount = 12;
 
         // when
-        BuyDto result = product.buy(buyCount, now);
+        BuyDto result = CProduct.buy(buyCount, now);
+        ProductDetailDto detailDto = CProduct.getProductDetailDto(now);
 
         // then
         assertEquals(new BuyDto("콜라", 1000, 0, 12, 4), result);
+        assertEquals(new ProductDetailDto("콜라", 1000, 20, promotion.getName(), 2), detailDto);
     }
 
     @Test
@@ -244,17 +250,17 @@ class ProductTest {
         // given
         int quantity = 20;
         int pQuantity = 10;
-        product.addProduct(quantity);
-        product.addProduct(pQuantity, promotion);
+        CProduct.addProduct(quantity);
+        CProduct.addProduct(pQuantity, promotion);
         LocalDate now = LocalDate.of(2024, 11, 3);
         int buyCount = 12;
 
         // when
-        BuyDto result = product.buy(buyCount, now);
+        BuyDto result = CProduct.buy(buyCount, now);
+        ProductDetailDto detailDto = CProduct.getProductDetailDto(now);
 
         // then
         assertEquals(new BuyDto("콜라", 1000, 3, 9, 3), result);
+        assertEquals(new ProductDetailDto("콜라", 1000, 18, promotion.getName(), 0), detailDto);
     }
-
-
 }

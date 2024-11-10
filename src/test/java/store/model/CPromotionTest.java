@@ -13,7 +13,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-class PromotionTest {
+class CPromotionTest {
 
     private static final List<LocalDate> inDates = Arrays.asList(LocalDate.of(2024, 11, 1),
             LocalDate.of(2024, 11, 10),
@@ -28,7 +28,7 @@ class PromotionTest {
 
     @BeforeEach
     void setUp() {
-        promotion = new Promotion("test", 2, 1,
+        promotion = new CPromotion("test", 2, 1,
                 LocalDate.of(2024, 11, 1),
                 LocalDate.of(2024, 11, 30));
     }
