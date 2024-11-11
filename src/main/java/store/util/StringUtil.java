@@ -17,6 +17,9 @@ public class StringUtil {
      * 출력 형식을 맞추기 위해 적용
      */
     private static final DecimalFormat INT_FORMAT = new DecimalFormat("###,###");
+    /**
+     * 파일 에러 메세지 형식
+     */
     private static final String FILE_ERROR_FORMAT =
             "%s을 읽어오던 중 문제가 생겼습니다.";
     private static final String PRODUCT_DETAIL_NO_PROMOTION_FORMAT = "- %s %s원 %s";
@@ -55,6 +58,16 @@ public class StringUtil {
     public static String intToPriceFormat(int n) {
         return INT_FORMAT.format(n);
     }
+
+    /**
+     * 재고를 출력 형식에 맞게 변환
+     * <pre>
+     *     재고가 있는 경우 -> n개
+     *     재고가 없는 경우 -> 재고 없음
+     * </pre>
+     * @param n 재고
+     * @return 형식에 맞는 재고
+     */
     private static String quantityToString(int n) {
         if (n == 0) {
             return NO_QUANTITY;
