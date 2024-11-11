@@ -58,6 +58,7 @@ public class ConvenienceController {
 
     /**
      * 환영 인사와 편의점 상품을 보여줍니다.
+     *
      * @param now 현재 시각
      */
     private void welcome(LocalDate now) {
@@ -69,6 +70,7 @@ public class ConvenienceController {
      * <pre>
      *     구매할 제품들을 받고 특이사항이 있다면 질문을 통해 해결합니다.
      * </pre>
+     *
      * @param now 현재 시각
      */
     private void buy(LocalDate now) {
@@ -154,6 +156,7 @@ public class ConvenienceController {
 
     /**
      * 추가로 구매할 물품이 있는지 질문합니다.
+     *
      * @return 추가로 구매한 물품이 있는 경우 true
      */
     private boolean askContinue() {
