@@ -9,7 +9,8 @@ public enum BuyState {
      * 정상 구매 가능
      */
     NOMAL {
-        public void check(BuyInputDto buyInput, BuyStateDto buyState, InputView inputView) { }
+        public void check(BuyInputDto buyInput, BuyStateDto buyState, InputView inputView) {
+        }
     },
     /**
      * 프로모션 상품 받을 수 있음
@@ -34,8 +35,9 @@ public enum BuyState {
 
     /**
      * 각 상태에 맞는 체크 함수
-     * @param buyInput 구매 입력 데이터
-     * @param buyState 구매 상태 데이터
+     *
+     * @param buyInput  구매 입력 데이터
+     * @param buyState  구매 상태 데이터
      * @param inputView 입력 도우미
      */
     public abstract void check(BuyInputDto buyInput, BuyStateDto buyState, InputView inputView);
