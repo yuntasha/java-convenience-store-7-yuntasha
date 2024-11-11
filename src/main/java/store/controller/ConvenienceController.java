@@ -31,6 +31,9 @@ public class ConvenienceController {
         this.fileReaderHelper = fileReaderHelper;
     }
 
+    /**
+     * 편의점 동작
+     */
     public void run() {
         boolean isContinue = true;
 
@@ -46,14 +49,28 @@ public class ConvenienceController {
         }
     }
 
+    /**
+     * 편의점 초기화 - 재고와 프로모션 파일에서 불러옵니다.
+     */
     private void init() {
         convenience.init(fileReaderHelper.readPromotionFile(), fileReaderHelper.readProductFile());
     }
 
+    /**
+     * 환영 인사와 편의점 상품을 보여줍니다.
+     * @param now 현재 시각
+     */
     private void welcome(LocalDate now) {
         outputView.welcome(convenience.getProductDetails(now));
     }
 
+    /**
+     * 구매하기
+     * <pre>
+     *     구매할 제품들을 받고 특이사항이 있다면 질문을 통해 해결합니다.
+     * </pre>
+     * @param now 현재 시각
+     */
     private void buy(LocalDate now) {
         boolean isGood = false;
         while (!isGood) {
@@ -114,6 +131,9 @@ public class ConvenienceController {
         return buyList;
     }
 
+    /**
+     * 멤버십 할인을 적용할 것인지 질문합니다.
+     */
     private void isMembership() {
         while (true) {
             try {
@@ -125,10 +145,17 @@ public class ConvenienceController {
         }
     }
 
+    /**
+     * 구매한 제품에 대해 영수증을 출력합니다.
+     */
     private void totalPrint() {
         outputView.totalPrint(receipt.getProducts(), receipt.getPromotions(), receipt.getTotal());
     }
 
+    /**
+     * 추가로 구매할 물품이 있는지 질문합니다.
+     * @return 추가로 구매한 물품이 있는 경우 true
+     */
     private boolean askContinue() {
         while (true) {
             try {
