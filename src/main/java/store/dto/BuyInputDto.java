@@ -22,6 +22,6 @@ public class BuyInputDto {
     }
 
     public void removeCount(int n) {
-        count-=n;
+        count -= n;
     }
 }

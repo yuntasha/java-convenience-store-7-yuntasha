@@ -31,6 +31,7 @@ public class CPromotion implements Promotion {
      * <pre>
      * start <= now <= end
      * </pre>
+     *
      * @param now 현재 날짜
      * @return 기간안이면 true
      */

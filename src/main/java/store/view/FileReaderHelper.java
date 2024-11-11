@@ -12,7 +12,7 @@ public class FileReaderHelper {
     private static FileReaderHelper fileReaderHelper;
 
     public static FileReaderHelper getInstance() {
-        if (fileReaderHelper==null) {
+        if (fileReaderHelper == null) {
             fileReaderHelper = new FileReaderHelper();
         }
         return fileReaderHelper;

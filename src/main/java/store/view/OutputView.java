@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface OutputView {
     void welcome(List<ProductDetailDto> productDetailDto);
+
     void printErrorMessage(ConvenienceException e);
+
     void totalPrint(String allProduct, String promotionProduct, String total);
 }

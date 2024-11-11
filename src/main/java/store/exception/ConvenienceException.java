@@ -1,8 +1,6 @@
 package store.exception;
 
-import store.util.StringUtil;
-
-public class ConvenienceException extends IllegalArgumentException{
+public class ConvenienceException extends IllegalArgumentException {
 
     private ErrorMessage errorMessage;
 

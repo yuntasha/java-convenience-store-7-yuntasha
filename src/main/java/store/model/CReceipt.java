@@ -111,6 +111,6 @@ public class CReceipt implements Receipt {
         }
         return 0;
     }
-    
-    
+
+
 }

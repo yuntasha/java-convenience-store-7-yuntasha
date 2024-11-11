@@ -13,11 +13,12 @@ public class ProductDetailDto {
 
     /**
      * 프로모션이 있는 경우 생성자
-     * @param name 재고 이름
-     * @param price 재고 가격
-     * @param quantity 재고 개수
+     *
+     * @param name          재고 이름
+     * @param price         재고 가격
+     * @param quantity      재고 개수
      * @param promotionName 프로모션 이름
-     * @param pQuantity 프로모션 재고 개수
+     * @param pQuantity     프로모션 재고 개수
      */
     public ProductDetailDto(String name, int price, int quantity, String promotionName, int pQuantity) {
         this.name = name;
@@ -31,8 +32,8 @@ public class ProductDetailDto {
      * 프로모션이 없는 경우 생성자
      * 프로모션 이름 null, 프로모션 개수 0개
      *
-     * @param name 재고 이름
-     * @param price 재고 가격
+     * @param name     재고 이름
+     * @param price    재고 가격
      * @param quantity 재고 개수
      */
     public ProductDetailDto(String name, int price, int quantity) {

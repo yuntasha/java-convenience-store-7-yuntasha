@@ -13,7 +13,7 @@ class ConvenienceTest {
     void 프로모션과_재고_초기화() {
         // given
         Convenience convenience = new Convenience();
-        
+
         // when
         convenience.init(List.of("탄산2+1,2,1,2024-01-01,2024-12-31", "MD추천상품,1,1,2024-01-01,2024-12-31"),
                 List.of("콜라,1000,10,탄산2+1", "콜라,1000,10,null", "사이다,1000,8,탄산2+1", "물,500,10,null"));
