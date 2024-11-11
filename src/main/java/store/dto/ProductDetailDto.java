@@ -3,10 +3,25 @@ package store.dto;
 import java.util.Objects;
 
 public class ProductDetailDto {
+    /**
+     * 제품 이름
+     */
     private final String name;
+    /**
+     * 제품 가격
+     */
     private final int price;
+    /**
+     * 일반 제품 재고
+     */
     private final int quantity;
+    /**
+     * 프로모션 이름
+     */
     private final String promotionName;
+    /**
+     * 프로모션 제품 재고
+     */
     private final int pQuantity;
 
     /**
@@ -42,22 +57,47 @@ public class ProductDetailDto {
         this.pQuantity = 0;
     }
 
+    /**
+     * 제품 이름 반환
+     *
+     * @return 제품 이름 반환
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * 제품 가격 반환
+     *
+     * @return 제품 가격 반환
+     */
     public int getPrice() {
         return price;
     }
 
+    /**
+     * 일반 제품 재고 반환
+     *
+     * @return 일반 제품 재고
+     */
     public int getQuantity() {
         return quantity;
     }
 
+    /**
+     * 프로모션 이름 반환
+     *
+     * @return
+     */
     public String getPromotionName() {
         return promotionName;
     }
 
+    /**
+     * 프로모션 제품 재고 반환
+     *
+     * @return 프로모션 제품 개수
+     */
     public int getPQuantity() {
         return pQuantity;
     }
