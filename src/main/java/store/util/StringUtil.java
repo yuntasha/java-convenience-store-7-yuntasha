@@ -1,6 +1,5 @@
 package store.util;
 
-import store.dto.BuyInputDto;
 import store.dto.ProductDetailDto;
 
 import java.text.DecimalFormat;
@@ -12,15 +11,6 @@ public class StringUtil {
     public static final String LINE_BREAK = "\n";
     public static final String HIGH_BAR = "-";
     public static final String COMMA = ",";
-    public static final String PRODUCT_TITLE = "상품명\t\t수량\t금액";
-    public static final String PRODUCT_FORMAT = "%s\t%d\t%s";
-    public static final String PROMOTION_TITLE = "=============증\t정===============";
-    public static final String PROMOTION_FORMAT = "%s\t\t%d";
-    public static final String DELIMITER = "====================================";
-    public static final String TOTAL_FORMAT = "총구매액\t\t%d\t%s\n" +
-            "행사할인\t\t\t-%s\n" +
-            "멤버십할인\t\t\t-%s\n" +
-            "내실돈\t\t\t %s";
     public static final DecimalFormat INT_FORMAT = new DecimalFormat("###,###");
     public static final String EMPTY = "";
 
@@ -58,6 +48,6 @@ public class StringUtil {
         if (n == 0) {
             return NO_QUANTITY;
         }
-        return String.valueOf(n) + COUNT;
+        return n + COUNT;
     }
 }

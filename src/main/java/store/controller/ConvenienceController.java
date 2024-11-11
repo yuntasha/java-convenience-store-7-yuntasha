@@ -4,7 +4,6 @@ import store.dto.BuyDto;
 import store.dto.BuyInputDto;
 import store.dto.BuyStateDto;
 import store.exception.ConvenienceException;
-import store.model.BuyState;
 import store.model.Convenience;
 import store.model.Receipt;
 import store.util.TimeUtil;

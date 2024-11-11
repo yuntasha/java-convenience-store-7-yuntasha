@@ -1,7 +1,5 @@
 package store.dto;
 
-import store.util.StringUtil;
-
 import java.util.Objects;
 
 public class ProductDetailDto {

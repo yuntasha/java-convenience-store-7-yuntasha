@@ -10,6 +10,12 @@ import java.util.stream.Collectors;
 public class CReceipt implements Receipt {
     private final List<BuyDto> products;
     private boolean membership;
+    public static final String PRODUCT_FORMAT = "%s\t%d\t%s";
+    private static final String PROMOTION_FORMAT = "%s\t\t%d";
+    private static final String TOTAL_FORMAT = "총구매액\t\t%d\t%s\n" +
+            "행사할인\t\t\t-%s\n" +
+            "멤버십할인\t\t\t-%s\n" +
+            "내실돈\t\t\t %s";
 
     public CReceipt() {
         this.products = new ArrayList<>();
@@ -41,7 +47,7 @@ public class CReceipt implements Receipt {
     }
 
     private String modifyProduct(BuyDto dto) {
-        return String.format(StringUtil.PRODUCT_FORMAT,
+        return String.format(PRODUCT_FORMAT,
                 dto.getName(), dto.getAllCount(),
                 StringUtil.INT_FORMAT.format(dto.getAllPrice()));
     }
@@ -62,7 +68,7 @@ public class CReceipt implements Receipt {
     }
 
     private String modifyProMotion(BuyDto dto) {
-        return String.format(StringUtil.PROMOTION_FORMAT,
+        return String.format(PROMOTION_FORMAT,
                 dto.getName(), dto.getFreeCount());
     }
 
@@ -85,7 +91,7 @@ public class CReceipt implements Receipt {
         int membershipDiscount = getMembershipDiscount();
         int totalPrice = allPrice - promotionDiscount - membershipDiscount;
 
-        return String.format(StringUtil.TOTAL_FORMAT,
+        return String.format(TOTAL_FORMAT,
                 allCount, StringUtil.INT_FORMAT.format(allPrice),
                 StringUtil.INT_FORMAT.format(promotionDiscount),
                 StringUtil.INT_FORMAT.format(membershipDiscount),

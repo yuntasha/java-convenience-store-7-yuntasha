@@ -1,7 +1,6 @@
 package store.view;
 
 import store.dto.BuyInputDto;
-import store.dto.BuyStateDto;
 
 import java.util.List;
 

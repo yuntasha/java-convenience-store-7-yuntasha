@@ -14,6 +14,9 @@ public class COutputView implements OutputView {
     private static final String HELLO_MESSAGE = "안녕하세요. W편의점입니다.\n" +
             "현재 보유하고 있는 상품입니다.\n";
     private static final String W_CONVENIENCE = "==============W 편의점================";
+    private static final String PRODUCT_TITLE = "상품명\t\t수량\t금액";
+    private static final String PROMOTION_TITLE = "=============증\t정===============";
+    private static final String DELIMITER = "====================================";
 
     public static OutputView getInstance() {
         if (Objects.isNull(cOutputView)) {
@@ -37,11 +40,11 @@ public class COutputView implements OutputView {
         StringJoiner printText = new StringJoiner(StringUtil.LINE_BREAK);
 
         printText.add(W_CONVENIENCE);
-        printText.add(StringUtil.PRODUCT_TITLE);
+        printText.add(PRODUCT_TITLE);
         printText.add(allProduct);
-        printText.add(StringUtil.PROMOTION_TITLE);
+        printText.add(PROMOTION_TITLE);
         printText.add(promotionProduct);
-        printText.add(StringUtil.DELIMITER);
+        printText.add(DELIMITER);
         printText.add(total);
 
         System.out.println(printText.toString());
