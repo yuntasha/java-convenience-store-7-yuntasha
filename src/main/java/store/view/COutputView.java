@@ -36,7 +36,8 @@ public class COutputView implements OutputView {
     public void totalPrint(String allProduct, String promotionProduct, String total) {
         StringJoiner printText = new StringJoiner(StringUtil.LINE_BREAK);
 
-        printText.add(StringUtil.W_CONVENIENCE);
+        printText.add(W_CONVENIENCE);
+        printText.add(StringUtil.PRODUCT_TITLE);
         printText.add(allProduct);
         printText.add(StringUtil.PROMOTION_TITLE);
         printText.add(promotionProduct);
