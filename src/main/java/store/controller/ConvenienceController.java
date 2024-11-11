@@ -92,16 +92,7 @@ public class ConvenienceController {
         boolean isGood = false;
         while (!isGood) {
             try {
-                if (buyState.getBuyState() == BuyState.ADD_MORE &&
-                        inputView.isAdd(buyInput.getName())) {
-                    buyInput.addCount();
-                }
-
-                if (buyState.getBuyState() == BuyState.OUT_OF_STOCK &&
-                        inputView.isRemove(buyInput.getName(), buyState.getCount())) {
-                    buyInput.removeCount(buyState.getCount());
-                }
-
+                buyState.getBuyState().check(buyInput, buyState, inputView);
                 isGood = true;
             } catch (ConvenienceException e) {
                 outputView.printErrorMessage(e);
