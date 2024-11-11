@@ -6,7 +6,7 @@ import store.exception.ErrorMessage;
 import java.util.regex.Pattern;
 
 public class Validator {
-    public static final String BUY_INPUT_FORMAT = "^\\[[가-힣]+-[1-9][0-9]*\\](,\\[[가-힣]+-[1-9][0-9]*\\])*$";
+    public static final String BUY_INPUT_FORMAT = "^\\[[가-힣]+-[1-9][0-9]{0,8}\\](,\\[[가-힣]+-[1-9][0-9]{0,8}\\])*$";
 
     /**
      * 입력 형식 유효성 검사
