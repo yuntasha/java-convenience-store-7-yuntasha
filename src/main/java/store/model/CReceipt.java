@@ -89,7 +89,7 @@ public class CReceipt implements Receipt {
     private String modifyProduct(BuyDto dto) {
         return String.format(PRODUCT_FORMAT,
                 dto.getName(), dto.getAllCount(),
-                StringUtil.INT_FORMAT.format(dto.getAllPrice()));
+                StringUtil.intToPriceFormat(dto.getAllPrice()));
     }
 
     /**
@@ -132,10 +132,10 @@ public class CReceipt implements Receipt {
         int totalPrice = allPrice - promotionDiscount - membershipDiscount;
 
         return String.format(TOTAL_FORMAT,
-                allCount, StringUtil.INT_FORMAT.format(allPrice),
-                StringUtil.INT_FORMAT.format(promotionDiscount),
-                StringUtil.INT_FORMAT.format(membershipDiscount),
-                StringUtil.INT_FORMAT.format(totalPrice));
+                allCount, StringUtil.intToPriceFormat(allPrice),
+                StringUtil.intToPriceFormat(promotionDiscount),
+                StringUtil.intToPriceFormat(membershipDiscount),
+                StringUtil.intToPriceFormat(totalPrice));
     }
 
     /**
