@@ -56,30 +56,70 @@ public class CInputView implements InputView {
         return new BuyInputDto(productCount);
     }
 
+    /**
+     * 무료로 받을 수 있는 프로모션 상품 추가할 것인지 여부 질문 및 답
+     * <pre>
+     *     현재 {제품 이름}은(는) 1개를 무료로 더 받을 수 있습니다. 추가하시겠습니까? (Y/N)
+     * </pre>
+     *
+     * @param name 제품 이름
+     * @return 상품을 받으면 true
+     */
     @Override
     public boolean isAdd(String name) {
         System.out.println(String.format(ADD_MESSAGE_FORMAT, name));
         return isYes();
     }
 
+    /**
+     * 프로모션이 적용되지 않는 제품 뺄 것인지 질문 및 답
+     * <pre>
+     *     현재 %s %d개는 프로모션 할인이 적용되지 않습니다. 그래도 구매하시겠습니까? (Y/N)
+     * </pre>
+     *
+     * @param name  제품 이름
+     * @param count 프로모션이 적용되지 않느 제품 개수
+     * @return 제품을 뺀다면 true
+     */
     @Override
     public boolean isRemove(String name, int count) {
         System.out.println(String.format(REMOVE_MESSAGE_FORMAT, name, count));
         return isYes();
     }
 
+    /**
+     * 멤버십 할인을 받을 것인지 질문 및 답
+     * <pre>
+     *     멤버십 할인을 받으시겠습니까? (Y/N)
+     * </pre>
+     *
+     * @return 멤버십 할인을 받으면 true
+     */
     @Override
     public boolean isMembership() {
         System.out.println(MEMBERSHIP_MESSAGE);
         return isYes();
     }
 
+    /**
+     * 상품을 추가로 구매할 것인지 여부
+     * <pre>
+     *     감사합니다. 구매하고 싶은 다른 상품이 있나요? (Y/N)
+     * </pre>
+     *
+     * @return 추가로 구매하면 true
+     */
     @Override
     public boolean continueShopping() {
         System.out.println(CONTINUE_SHOPPING_MESSAGE);
         return isYes();
     }
 
+    /**
+     * 입력을 받아 Y면 True, N이면 False 나머지는 예외
+     *
+     * @return Y:true, N:false
+     */
     private boolean isYes() {
         String input = Console.readLine();
         if (input.equals("Y")) {
