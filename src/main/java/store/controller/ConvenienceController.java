@@ -89,15 +89,22 @@ public class ConvenienceController {
      * @param buyState 구매 상태
      */
     private void ask(BuyInputDto buyInput, BuyStateDto buyState) {
-        if (buyState.getBuyState() == BuyState.ADD_MORE) {
-            if (inputView.isAdd(buyInput.getName())) {
-                buyInput.addCount();
-            }
-        }
+        boolean isGood = false;
+        while (!isGood) {
+            try {
+                if (buyState.getBuyState() == BuyState.ADD_MORE &&
+                        inputView.isAdd(buyInput.getName())) {
+                    buyInput.addCount();
+                }
 
-        if (buyState.getBuyState() == BuyState.OUT_OF_STOCK) {
-            if (inputView.isRemove(buyInput.getName(), buyState.getCount())) {
-                buyInput.removeCount(buyState.getCount());
+                if (buyState.getBuyState() == BuyState.OUT_OF_STOCK &&
+                        inputView.isRemove(buyInput.getName(), buyState.getCount())) {
+                    buyInput.removeCount(buyState.getCount());
+                }
+
+                isGood = true;
+            } catch (ConvenienceException e) {
+                outputView.printErrorMessage(e);
             }
         }
     }
