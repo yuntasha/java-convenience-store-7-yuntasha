@@ -26,7 +26,7 @@ public enum BuyState {
      */
     OUT_OF_STOCK {
         public void check(BuyInputDto buyInput, BuyStateDto buyState, InputView inputView) {
-            if (inputView.isRemove(buyInput.getName(), buyState.getCount())) {
+            if (!inputView.isRemove(buyInput.getName(), buyState.getCount())) {
                 buyInput.removeCount(buyState.getCount());
             }
         }
