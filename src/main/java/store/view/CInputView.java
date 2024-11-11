@@ -39,20 +39,6 @@ public class CInputView implements InputView {
         return Arrays.stream(input.split(StringUtil.COMMA)).map(this::toBuyInputDto).toList();
     }
 
-
-    /**
-     * 입력 형식 유효성 검사
-     * 테스트 떄문에 protected로 설정 (추후 리팩토링)
-     *
-     * @param input 입력
-     * @throws ConvenienceException 형식에 맞지않음
-     */
-    void validateBuyInput(String input) throws ConvenienceException {
-        if (!Pattern.matches(StringUtil.BUY_INPUT_FORMAT, input)) {
-            throw new ConvenienceException(ErrorMessage.WRONG_INPUT_FORMAT_ERROR);
-        }
-    }
-
     /**
      * 분리된 텍스트를 데이터로 변환
      *
