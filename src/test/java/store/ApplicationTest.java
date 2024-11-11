@@ -58,7 +58,7 @@ class ApplicationTest extends NsTest {
     @DisplayName("일부 제품 프로모션 적용 안됨")
     void 일부_제품_프로모션_적용_안됨() {
         assertNowTest(() -> {
-            run("[콜라-12]", "N", "N");
+            run("[콜라-12]", "N", "N", "N");
             assertThat(output().replaceAll("\\s", "")).contains("현재콜라3개는프로모션할인이적용되지않습니다.그래도구매하시겠습니까?(Y/N)","내실돈6,000");
         }, LocalDate.of(2024, 2, 1).atStartOfDay());
     }
