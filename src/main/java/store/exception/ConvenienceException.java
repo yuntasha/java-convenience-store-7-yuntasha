@@ -2,7 +2,9 @@ package store.exception;
 
 public class ConvenienceException extends IllegalArgumentException {
 
-    private ErrorMessage errorMessage;
+    private static final String ERROR_PREFIX = "[ERROR] ";
+
+    private final ErrorMessage errorMessage;
 
     public ConvenienceException(ErrorMessage errorMessage) {
         super(errorMessage.getMessage());
@@ -10,6 +12,6 @@ public class ConvenienceException extends IllegalArgumentException {
     }
 
     public String getConsoleMessage() {
-        return StringUtil.ERROR_PREFIX+errorMessage.getMessage();
+        return ERROR_PREFIX + errorMessage.getMessage();
     }
 }

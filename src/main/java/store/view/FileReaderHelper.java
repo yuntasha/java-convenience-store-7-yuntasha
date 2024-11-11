@@ -1,7 +1,6 @@
 package store.view;
 
 import store.exception.FileReadException;
-import store.util.StringUtil;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -10,6 +9,8 @@ import java.util.List;
 public class FileReaderHelper {
 
     private static FileReaderHelper fileReaderHelper;
+    private static final String PRODUCT_FILE = "products.md";
+    private static final String PROMOTION_FILE = "promotions.md";
 
     public static FileReaderHelper getInstance() {
         if (fileReaderHelper == null) {
@@ -21,7 +22,7 @@ public class FileReaderHelper {
     public List<String> readProductFile() {
         List<String> products = new ArrayList<>();
 
-        readFile(products, StringUtil.PRODUCT_FILE);
+        readFile(products, PRODUCT_FILE);
 
         return products;
     }
@@ -29,7 +30,7 @@ public class FileReaderHelper {
     public List<String> readPromotionFile() {
         List<String> promotions = new ArrayList<>();
 
-        readFile(promotions, StringUtil.PROMOTION_FILE);
+        readFile(promotions, PROMOTION_FILE);
 
         return promotions;
     }

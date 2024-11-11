@@ -11,6 +11,9 @@ import java.util.StringJoiner;
 public class COutputView implements OutputView {
 
     private static OutputView cOutputView;
+    private static final String HELLO_MESSAGE = "안녕하세요. W편의점입니다.\n" +
+            "현재 보유하고 있는 상품입니다.\n";
+    private static final String W_CONVENIENCE = "==============W 편의점================";
 
     public static OutputView getInstance() {
         if (Objects.isNull(cOutputView)) {
@@ -45,7 +48,7 @@ public class COutputView implements OutputView {
 
     private String makeWelcome(List<ProductDetailDto> productDetailDto) {
         StringJoiner printText = new StringJoiner(StringUtil.LINE_BREAK);
-        printText.add(StringUtil.HELLO_MESSAGE);
+        printText.add(HELLO_MESSAGE);
 
         productDetailDto.stream().map(StringUtil::dtoToString).forEach(printText::add);
         printText.add(StringUtil.EMPTY);
