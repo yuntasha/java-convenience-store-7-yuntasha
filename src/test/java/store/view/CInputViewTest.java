@@ -4,6 +4,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.FieldSource;
 import store.exception.ConvenienceException;
 import store.exception.ErrorMessage;
+import store.util.Validator;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ class CInputViewTest {
         System.out.println(input);
 
         // then
-        assertDoesNotThrow(() -> cInputView.validateBuyInput(input));
+        assertDoesNotThrow(() -> Validator.validateBuyInput(input));
     }
 
     @ParameterizedTest(name = "{0}은 구매 형식이 아닙니다.")
@@ -33,7 +34,7 @@ class CInputViewTest {
         CInputView cInputView = CInputView.getInstance();
 
         // when
-        ConvenienceException e = assertThrows(ConvenienceException.class, () -> cInputView.validateBuyInput(input));
+        ConvenienceException e = assertThrows(ConvenienceException.class, () -> Validator.validateBuyInput(input));
 
         // then
         assertEquals(ErrorMessage.WRONG_INPUT_FORMAT_ERROR.getMessage(), e.getMessage());
