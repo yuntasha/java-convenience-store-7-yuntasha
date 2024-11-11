@@ -10,11 +10,34 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class CProduct implements Product {
-
+    /**
+     * 제품 이름
+     */
     private String name;
+    /**
+     * 제품 가격
+     */
     private int price;
+    /**
+     * 제품 재고
+     * <pre>
+     *     기본값 0
+     * </pre>
+     */
     private int quantity = 0;
+    /**
+     * 프로모션
+     * <pre>
+     *     기본값 null
+     * </pre>
+     */
     private Promotion promotion = null;
+    /**
+     * 프로모션 재고
+     * <pre>
+     *     기본값 0
+     * </pre>
+     */
     private int pQuantity = 0;
 
     /**
